@@ -35,7 +35,7 @@ namespace DB
         /// <param name="e"></param>
         private void Form1_Load(object sender, EventArgs e)
         {
-            con = new NpgsqlConnection("Server=localhost;Port=5432; User Id=postgres;Password=2000; Database=school;");
+            con = new NpgsqlConnection("Server=localhost;Port=5432; User Id=postgres;Password=postgres; Database=school;");
             con.Open();
         }
 
