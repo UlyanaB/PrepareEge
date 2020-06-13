@@ -10,16 +10,16 @@ using System.Windows.Forms;
 
 namespace DB
 {
-    public partial class Form2 : Form
+    public partial class MainForm : Form
     {
-        public Form2()
+        public MainForm()
         {
             InitializeComponent();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Form1 newForm = new Form1();
+            Student newForm = new Student();
             newForm.Show();
         }
 

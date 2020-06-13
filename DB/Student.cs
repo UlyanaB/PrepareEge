@@ -12,7 +12,7 @@ using System.Windows.Forms;
 
 namespace DB
 {
-    public partial class Form1 : Form
+    public partial class Student : Form
     {
         private NpgsqlConnection con;
         private NpgsqlDataAdapter da;
@@ -23,7 +23,7 @@ namespace DB
         /// <summary>
         /// конструктор формы
         /// </summary>
-        public Form1()
+        public Student()
         {
             InitializeComponent();
         }

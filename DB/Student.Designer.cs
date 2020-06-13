@@ -1,6 +1,6 @@
 ﻿namespace DB
 {
-    partial class Form1
+    partial class Student
     {
         /// <summary>
         /// Обязательная переменная конструктора.
