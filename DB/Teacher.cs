@@ -118,7 +118,6 @@ namespace DB
                             "   Order by ob.title;";
             all_update_button(select);
             dataGridView1.Columns[0].ReadOnly = true;
-            Program.mainForm.dt.TableName = "object0";
         }
 
 
@@ -130,7 +129,6 @@ namespace DB
                             "   ORDER BY te.secondnamet;";
             all_update_button(select);
             dataGridView1.Columns[0].ReadOnly = true;
-            Program.mainForm.dt.TableName = "teacher";
         }
 
         private void button1_Click(object sender, EventArgs e)

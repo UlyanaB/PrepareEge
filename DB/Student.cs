@@ -214,7 +214,6 @@ namespace DB
             string select = "SELECT cl.id_class, cl.class_number FROM class0 cl;";
             all_update_button(select);
             dataGridView1.Columns[0].ReadOnly = true;
-            Program.mainForm.dt.TableName = "class0";
         }
 
         /// <summary>
@@ -227,7 +226,6 @@ namespace DB
             string select = "SELECT ob.id_object, ob.title FROM object0 ob;";
             all_update_button(select);
             dataGridView1.Columns[0].ReadOnly = true;
-            Program.mainForm.dt.TableName = "object0";
         }
 
         /// <summary>
@@ -244,7 +242,6 @@ namespace DB
             all_update_button(select);
             dataGridView1.Columns[0].ReadOnly = true;
             dataGridView1.Columns[1].ReadOnly = true;
-            Program.mainForm.dt.TableName = "student";
         }
 
         /// <summary>
