@@ -135,8 +135,16 @@ namespace DB
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string select = "SELECT ls.id_lesson, ls.id_object, ls.id_teacher FROM lesson ls;";
-            all_update_button(select);
+            string select = "SELECT ls.id_lesson,                                       " +
+                            "       ob.id_object, ob.title,                             " +
+                            "       t.id_teacher, t.secondnamet, t.namt, t.middlenamet  " +
+                            "   FROM lesson ls                                          " +
+                            "   LEFT JOIN object0 ob on ls.id_object = ob.id_object          " +
+                            "   LEFT JOIN teacher t on ls.id_teacher = t.id_teacher          " +
+                            "   ORDER BY t.secondnamet, t.namt, t.middlenamet           ";
+            all_select_button(select);
+            dataGridView1.Columns[0].ReadOnly = true;
+            Program.mainForm.dt.TableName = "lesson";
         }
 
         private void BtnLessonVid_Click(object sender, EventArgs e)
@@ -160,6 +168,68 @@ namespace DB
         {
             string sql = "SELECT cl.id_classlesson, te.namt, te.secondnamet, te.middlenamet, c0.class_number FROM class_lesson cl, class0 c0, lesson le, teacher te WHERE cl.id_lesson=le.id_lesson AND c0.id_class=cl.id_class AND te.id_teacher=le.id_teacher;";
             all_select_button(sql);
+        }
+
+        private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            DataGridView dgv = sender as DataGridView;
+            DataGridViewRow dgvr = dgv.Rows[e.RowIndex];
+            string tableName = (dgv.DataSource as DataTable).TableName;
+            switch (tableName)
+            {
+                case "lesson":
+                    LessonDoubleClick(dgvr);
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
+        private void LessonDoubleClick(DataGridViewRow dgvr)
+        {
+            int id = (int)dgvr.Cells[0].Value;
+
+            string teach =    dgvr.Cells[4].Value as string + " " + dgvr.Cells[5].Value + " " + dgvr.Cells[6].Value;
+            KeyValuePair<int, string> predmet = new KeyValuePair<int, string>((int)dgvr.Cells[1].Value, dgvr.Cells[2].Value as string);
+            KeyValuePair<int, string> teacher = new KeyValuePair<int, string>((int)dgvr.Cells[3].Value, teach);
+
+            Lessons ls = new Lessons();
+            ls.lblLessonsId.Text = id.ToString();
+
+            // по преподавателям 
+            string sqlStud = "select      t.id_teacher, t.secondnamet || ' ' || t.namt || ' ' || t.middlenamet " +
+                                "    from    teacher t                                                         " +
+                                "    order by t.secondnamet, t.namt, t.middlenamet  ";
+            Program.mainForm.da = new NpgsqlDataAdapter(sqlStud, Program.mainForm.con);
+            Program.mainForm.ds.Reset();
+            Program.mainForm.da.Fill(Program.mainForm.ds);
+            Program.mainForm.dt = Program.mainForm.ds.Tables[0];
+            IList<KeyValuePair<int, string>> dsStudList = new List<KeyValuePair<int, string>>();
+            foreach (DataRow oneRow in Program.mainForm.dt.Rows)
+            {
+                dsStudList.Add(new KeyValuePair<int, string>((int)oneRow.ItemArray[0], oneRow.ItemArray[1] as string));
+            }
+            ls.cbxTeacher.DataSource = dsStudList;
+
+            // по предметам
+            string sqlObj = "select id_object, title from object0 order by title";
+            Program.mainForm.da = new NpgsqlDataAdapter(sqlObj, Program.mainForm.con);
+            Program.mainForm.ds.Reset();
+            Program.mainForm.da.Fill(Program.mainForm.ds);
+            Program.mainForm.dt = Program.mainForm.ds.Tables[0];
+            IList<KeyValuePair<int, string>> dsObjList = new List<KeyValuePair<int, string>>();
+            foreach (DataRow oneRow in Program.mainForm.dt.Rows)
+            {
+                dsObjList.Add(new KeyValuePair<int, string>((int)oneRow.ItemArray[0], oneRow.ItemArray[1] as string));
+            }
+            ls.cbxObject.DataSource = dsObjList;
+
+            // 
+            ls.cbxTeacher.SelectedItem = teacher;
+            ls.cbxObject.SelectedItem = predmet;
+
+            DialogResult dr = ls.ShowDialog();
         }
     }
 }

@@ -55,6 +55,7 @@
             this.dataGridView1.RowTemplate.Height = 24;
             this.dataGridView1.Size = new System.Drawing.Size(450, 379);
             this.dataGridView1.TabIndex = 0;
+            this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
             // 
             // groupBox1
             // 
@@ -91,7 +92,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(150, 19);
             this.button1.TabIndex = 0;
-            this.button1.Text = "Препадаёт";
+            this.button1.Text = "Преподаёт";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
