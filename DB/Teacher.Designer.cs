@@ -50,7 +50,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(10, 11);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 24;
             this.dataGridView1.Size = new System.Drawing.Size(450, 379);
@@ -65,9 +65,9 @@
             this.groupBox1.Controls.Add(this.BtnObject);
             this.groupBox1.Controls.Add(this.btnSave);
             this.groupBox1.Location = new System.Drawing.Point(475, 11);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox1.Size = new System.Drawing.Size(150, 159);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
@@ -76,7 +76,7 @@
             // button2
             // 
             this.button2.Location = new System.Drawing.Point(0, 132);
-            this.button2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button2.Margin = new System.Windows.Forms.Padding(2);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(150, 19);
             this.button2.TabIndex = 8;
@@ -87,7 +87,7 @@
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(0, 109);
-            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(150, 19);
             this.button1.TabIndex = 0;
@@ -98,7 +98,7 @@
             // BtnTeacher
             // 
             this.BtnTeacher.Location = new System.Drawing.Point(0, 85);
-            this.BtnTeacher.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.BtnTeacher.Margin = new System.Windows.Forms.Padding(2);
             this.BtnTeacher.Name = "BtnTeacher";
             this.BtnTeacher.Size = new System.Drawing.Size(150, 19);
             this.BtnTeacher.TabIndex = 7;
@@ -109,7 +109,7 @@
             // BtnObject
             // 
             this.BtnObject.Location = new System.Drawing.Point(0, 61);
-            this.BtnObject.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.BtnObject.Margin = new System.Windows.Forms.Padding(2);
             this.BtnObject.Name = "BtnObject";
             this.BtnObject.Size = new System.Drawing.Size(150, 19);
             this.BtnObject.TabIndex = 6;
@@ -121,7 +121,7 @@
             // 
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSave.Location = new System.Drawing.Point(0, 37);
-            this.btnSave.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnSave.Margin = new System.Windows.Forms.Padding(2);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(150, 19);
             this.btnSave.TabIndex = 5;
@@ -135,9 +135,9 @@
             this.groupBox2.Controls.Add(this.BtnClassLesson);
             this.groupBox2.Controls.Add(this.BtnLessonVid);
             this.groupBox2.Location = new System.Drawing.Point(475, 202);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox2.Size = new System.Drawing.Size(150, 188);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
@@ -146,7 +146,7 @@
             // BtnClassLesson
             // 
             this.BtnClassLesson.Location = new System.Drawing.Point(0, 51);
-            this.BtnClassLesson.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.BtnClassLesson.Margin = new System.Windows.Forms.Padding(2);
             this.BtnClassLesson.Name = "BtnClassLesson";
             this.BtnClassLesson.Size = new System.Drawing.Size(150, 19);
             this.BtnClassLesson.TabIndex = 1;
@@ -157,7 +157,7 @@
             // BtnLessonVid
             // 
             this.BtnLessonVid.Location = new System.Drawing.Point(0, 27);
-            this.BtnLessonVid.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.BtnLessonVid.Margin = new System.Windows.Forms.Padding(2);
             this.BtnLessonVid.Name = "BtnLessonVid";
             this.BtnLessonVid.Size = new System.Drawing.Size(150, 19);
             this.BtnLessonVid.TabIndex = 0;
@@ -173,10 +173,9 @@
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dataGridView1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "BtnLesson";
             this.Text = "Учитель";
-            this.Load += new System.EventHandler(this.Form3_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);

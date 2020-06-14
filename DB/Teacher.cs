@@ -14,44 +14,10 @@ namespace DB
     public partial class BtnLesson : Form
     {
 
-        private NpgsqlConnection con;
-        private NpgsqlDataAdapter da;
-        private DataSet ds = new DataSet();
-        private DataTable dt = new DataTable();
-
         public BtnLesson()
         {
             InitializeComponent();
         }
-
-        #region Закрытие и открытие формы
-        /// <summary>
-        /// конструктор формы
-        /// </summary>
-
-
-        /// <summary>
-        /// открыть соединение при загрузке формы
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void Form3_Load(object sender, EventArgs e)
-        {
-            con = new NpgsqlConnection("Server=localhost;Port=5432; User Id=postgres;Password=postgres; Database=school;");
-            con.Open();
-        }
-
-        /// <summary>
-        /// закрыть соединение при загрузке формы
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            con.Close();
-        }
-        #endregion Закрытие и открытие формы
-
         #region Работа с отчетами и формами ввода
         /// <summary>
         /// датаГрид в режим просмотра
@@ -80,11 +46,11 @@ namespace DB
         private void all_select_button(string sql)
         {
             viewOnly();
-            da = new NpgsqlDataAdapter(sql, con);
-            ds.Reset();
-            da.Fill(ds);
-            dt = ds.Tables[0];
-            dataGridView1.DataSource = dt;
+            Program.mainForm.da = new NpgsqlDataAdapter(sql, Program.mainForm.con);
+            Program.mainForm.ds.Reset();
+            Program.mainForm.da.Fill(Program.mainForm.ds);
+            Program.mainForm.dt = Program.mainForm.ds.Tables[0];
+            dataGridView1.DataSource = Program.mainForm.dt;
         }
 
         /// <summary>
@@ -95,12 +61,12 @@ namespace DB
         private void all_select_button(string sql, object param1)
         {
             viewOnly();
-            da = new NpgsqlDataAdapter(sql, con);
-            da.SelectCommand.Parameters.AddWithValue("param1", param1);
-            ds.Reset();
-            da.Fill(ds);
-            dt = ds.Tables[0];
-            dataGridView1.DataSource = dt;
+            Program.mainForm.da = new NpgsqlDataAdapter(sql, Program.mainForm.con);
+            Program.mainForm.da.SelectCommand.Parameters.AddWithValue("param1", param1);
+            Program.mainForm.ds.Reset();
+            Program.mainForm.da.Fill(Program.mainForm.ds);
+            Program.mainForm.dt = Program.mainForm.ds.Tables[0];
+            dataGridView1.DataSource = Program.mainForm.dt;
         }
 
         /// <summary>
@@ -111,13 +77,13 @@ namespace DB
         private void all_select_button(string sql, object param1, object param2)
         {
             viewOnly();
-            da = new NpgsqlDataAdapter(sql, con);
-            da.SelectCommand.Parameters.AddWithValue("param1", param1);
-            da.SelectCommand.Parameters.AddWithValue("param2", param2);
-            ds.Reset();
-            da.Fill(ds);
-            dt = ds.Tables[0];
-            dataGridView1.DataSource = dt;
+            Program.mainForm.da = new NpgsqlDataAdapter(sql, Program.mainForm.con);
+            Program.mainForm.da.SelectCommand.Parameters.AddWithValue("param1", param1);
+            Program.mainForm.da.SelectCommand.Parameters.AddWithValue("param2", param2);
+            Program.mainForm.ds.Reset();
+            Program.mainForm.da.Fill(Program.mainForm.ds);
+            Program.mainForm.dt = Program.mainForm.ds.Tables[0];
+            dataGridView1.DataSource = Program.mainForm.dt;
         }
 
         /// <summary>
@@ -127,15 +93,15 @@ namespace DB
         private void all_update_button(string select)
         {
             allowEdit();
-            da = new NpgsqlDataAdapter(select, con);
-            NpgsqlCommandBuilder npgsqlCommandBuilder = new NpgsqlCommandBuilder(da);
-            da.InsertCommand = npgsqlCommandBuilder.GetInsertCommand();
-            da.UpdateCommand = npgsqlCommandBuilder.GetUpdateCommand();
-            da.DeleteCommand = npgsqlCommandBuilder.GetDeleteCommand();
-            ds.Reset();
-            da.Fill(ds);
-            dt = ds.Tables[0];
-            dataGridView1.DataSource = dt;
+            Program.mainForm.da = new NpgsqlDataAdapter(select, Program.mainForm.con);
+            NpgsqlCommandBuilder npgsqlCommandBuilder = new NpgsqlCommandBuilder(Program.mainForm.da);
+            Program.mainForm.da.InsertCommand = npgsqlCommandBuilder.GetInsertCommand();
+            Program.mainForm.da.UpdateCommand = npgsqlCommandBuilder.GetUpdateCommand();
+            Program.mainForm.da.DeleteCommand = npgsqlCommandBuilder.GetDeleteCommand();
+            Program.mainForm.ds.Reset();
+            Program.mainForm.da.Fill(Program.mainForm.ds);
+            Program.mainForm.dt = Program.mainForm.ds.Tables[0];
+            dataGridView1.DataSource = Program.mainForm.dt;
         }
 
         #endregion Работа с отчетами и формами ввода
@@ -152,7 +118,7 @@ namespace DB
                             "   Order by ob.title;";
             all_update_button(select);
             dataGridView1.Columns[0].ReadOnly = true;
-            dt.TableName = "object0";
+            Program.mainForm.dt.TableName = "object0";
         }
 
 
@@ -164,7 +130,7 @@ namespace DB
                             "   ORDER BY te.secondnamet;";
             all_update_button(select);
             dataGridView1.Columns[0].ReadOnly = true;
-            dt.TableName = "teacher";
+            Program.mainForm.dt.TableName = "teacher";
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -181,7 +147,7 @@ namespace DB
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            da.Update(ds);
+            Program.mainForm.da.Update(Program.mainForm.ds);
         }
 
         private void button2_Click(object sender, EventArgs e)

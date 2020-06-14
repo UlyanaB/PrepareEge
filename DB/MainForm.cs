@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Npgsql;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,6 +13,11 @@ namespace DB
 {
     public partial class MainForm : Form
     {
+        internal NpgsqlConnection con = null;
+        internal NpgsqlDataAdapter da;
+        internal DataSet ds = new DataSet();
+        internal DataTable dt = new DataTable();
+
         public MainForm()
         {
             InitializeComponent();
@@ -27,6 +33,18 @@ namespace DB
         {
             BtnLesson newForm = new BtnLesson();
             newForm.Show();
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            con = new NpgsqlConnection("Server=localhost;Port=5432; User Id=postgres;Password=postgres; Database=school;");
+            con.Open();
+        }
+
+        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            con.Close();
+            con.Dispose();
         }
     }
 }
