@@ -40,7 +40,7 @@ namespace DB
         }
 
         /// <summary>
-        /// закрыть соединение при загрузке формы
+        /// закрыть соединение при выгрузке формы
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -134,6 +134,9 @@ namespace DB
             da.Fill(ds);
             dt = ds.Tables[0];
             dataGridView1.DataSource = dt;
+            dataGridView1.Columns[0].ReadOnly = false;
+            dataGridView1.Columns[1].ReadOnly = false;
+
         }
         #endregion Работа с отчетами и формами ввода
 
@@ -230,41 +233,46 @@ namespace DB
 
         #region Методы для работы с формами ввода данных
         /// <summary>
-        /// редактирование списка сотрудников
+        /// редактирование списка классов
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnWorker_Click(object sender, EventArgs e)
+        private void btnClass_Click(object sender, EventArgs e)
         {
             string select = "SELECT cl.id_class, cl.class_number FROM class0 cl;";
             all_update_button(select);
             dataGridView1.Columns[0].ReadOnly = true;
+            dt.TableName = "class0";
         }
 
         /// <summary>
-        /// редактирование списка типов работ
+        /// редактирование списка предметов
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnOrderType_Click(object sender, EventArgs e)
+        private void btnObject_Click(object sender, EventArgs e)
         {
             string select = "SELECT ob.id_object, ob.title FROM object0 ob;";
             all_update_button(select);
             dataGridView1.Columns[0].ReadOnly = true;
+            dt.TableName = "object0";
         }
 
         /// <summary>
-        /// редактирование списка заказов
+        /// редактирование списка учащихся
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnOrders_Click(object sender, EventArgs e)
+        private void btnStudents_Click(object sender, EventArgs e)
         {
             string select = "SELECT s.id_student,                                                                                   " +
                             "       (select c.class_number from class0 c where c.id_class = s.id_class) class_number,               " +
                             "       s.nams, s.secondnames, s.middlenames, s.logins, s.passwords                                     " +
                             "   FROM    student s";
             all_update_button(select);
+            dataGridView1.Columns[0].ReadOnly = true;
+            dataGridView1.Columns[1].ReadOnly = true;
+            dt.TableName = "student";
         }
 
         /// <summary>
@@ -277,11 +285,111 @@ namespace DB
             da.Update(ds);
         }
 
-        private void btnObject_Click(object sender, EventArgs e)
+        /// <summary>
+        /// редактирование 'выбора учащегося'
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnStudentChoice_Click(object sender, EventArgs e)
         {
-            string select = "SELECT chs.id_choicestudent, chs.id_student, chs.id_object FROM choicestudent chs;";
-            all_update_button(select);
+            string select = "SELECT chs.id_choicestudent,                                                               " +
+                            "       s.id_student,                                                                       " +
+                            "       (select c.class_number from class0 c where c.id_class = s.id_class) class_number,   " +
+                            "       s.nams, s.secondnames, s.middlenames,                                               " +
+                            "       chs.id_object, ob.title                                                             " +
+                            "   FROM choicestudent chs                                                                  " +
+                            "   JOIN student s on chs.id_student = s.id_student                                         " +
+                            "   JOIN object0 ob on chs.id_object = ob.id_object                                         " + 
+                            "   ORDER BY chs.id_choicestudent";
+            all_select_button(select);
+            dataGridView1.Columns[0].ReadOnly = true;
+            dt.TableName = "choicestudent";
         }
         #endregion Методы для работы с формами ввода данных
+
+        /// <summary>
+        /// Перевод учащегося в другой класс
+        /// </summary>
+        /// <param name="dgvr"></param>
+        private void StudentDoubleClick(DataGridViewRow dgvr)
+        {
+            int? id = dgvr.Cells[0].Value as int?;
+            if (id != null)
+            {
+                string studFio = dgvr.Cells[2].Value as string + " " + dgvr.Cells[4].Value + " " + dgvr.Cells[3].Value;
+                ChangeClass changeClass = new ChangeClass();
+                changeClass.Visible = false;
+                changeClass.lblId.Text = id.Value.ToString();
+                changeClass.lblFio.Text = studFio;
+                changeClass.txtClass.Text = dgvr.Cells[1].Value as string;
+                DialogResult dr = changeClass.ShowDialog();
+                if (dr == DialogResult.OK)
+                {
+                    string class0 = changeClass.txtClass.Text.Trim();
+                    if (class0 != ((dgvr.Cells[1].Value as string) ?? ""))
+                    {
+                        int? id_class = null;
+
+                        string selectSql = "select id_class from class0 where class_number = @class_number";
+                        using (NpgsqlCommand selCmd = new NpgsqlCommand(selectSql, con))
+                        {
+                            selCmd.Parameters.AddWithValue("class_number", class0);
+                            id_class = selCmd.ExecuteScalar() as int?;
+                        }
+                        if (!id_class.HasValue)
+                        {
+                            MessageBox.Show("нет такого класса", "error");
+                            return;
+                        }
+
+                        string updateSql = "update student set id_class = @id_class where id_student = @id_student";
+                        using (NpgsqlCommand updCmd = new NpgsqlCommand(updateSql, con))
+                        {
+                            updCmd.Parameters.AddWithValue("id_class", id_class);
+                            updCmd.Parameters.AddWithValue("id_student", id);
+                            updCmd.ExecuteNonQuery();
+                        }
+                    }
+                }
+                else if (dr == DialogResult.Cancel)
+                {
+                    // ничего не делать
+                }
+                else
+                {
+                    MessageBox.Show("DialogResult = " + dr.ToString(), "Error");
+                }
+            }
+        }
+
+        private void ChoiceStudentDoubleClick(DataGridViewRow dgvr)
+        {
+
+        }
+
+        /// <summary>
+        /// всякая доп обработка
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            DataGridView dgv = sender as DataGridView;
+            DataGridViewRow dgvr = dgv.Rows[e.RowIndex];
+            string tableName = (dgv.DataSource as DataTable).TableName;
+            switch(tableName)
+            {
+                case "student":
+                    StudentDoubleClick(dgvr);
+                    break;
+
+                case "choicestudent":
+                    ChoiceStudentDoubleClick(dgvr);
+                    break;
+
+                default:
+                    break;
+            }
+        }
     }
 }

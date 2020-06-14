@@ -33,7 +33,7 @@
             this.btnFirmProfit = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.btnSave = new System.Windows.Forms.Button();
-            this.btnWorker = new System.Windows.Forms.Button();
+            this.btnClass = new System.Windows.Forms.Button();
             this.btnOrderType = new System.Windows.Forms.Button();
             this.btnOrders = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -98,6 +98,7 @@
             this.dataGridView1.RowTemplate.Height = 24;
             this.dataGridView1.Size = new System.Drawing.Size(616, 424);
             this.dataGridView1.TabIndex = 3;
+            this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
             // 
             // btnSave
             // 
@@ -111,17 +112,17 @@
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // btnWorker
+            // btnClass
             // 
-            this.btnWorker.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnWorker.Location = new System.Drawing.Point(637, 76);
-            this.btnWorker.Margin = new System.Windows.Forms.Padding(2);
-            this.btnWorker.Name = "btnWorker";
-            this.btnWorker.Size = new System.Drawing.Size(148, 19);
-            this.btnWorker.TabIndex = 5;
-            this.btnWorker.Text = "Класс";
-            this.btnWorker.UseVisualStyleBackColor = true;
-            this.btnWorker.Click += new System.EventHandler(this.btnWorker_Click);
+            this.btnClass.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnClass.Location = new System.Drawing.Point(637, 76);
+            this.btnClass.Margin = new System.Windows.Forms.Padding(2);
+            this.btnClass.Name = "btnClass";
+            this.btnClass.Size = new System.Drawing.Size(148, 19);
+            this.btnClass.TabIndex = 5;
+            this.btnClass.Text = "Класс";
+            this.btnClass.UseVisualStyleBackColor = true;
+            this.btnClass.Click += new System.EventHandler(this.btnClass_Click);
             // 
             // btnOrderType
             // 
@@ -133,7 +134,7 @@
             this.btnOrderType.TabIndex = 6;
             this.btnOrderType.Text = "Предметы";
             this.btnOrderType.UseVisualStyleBackColor = true;
-            this.btnOrderType.Click += new System.EventHandler(this.btnOrderType_Click);
+            this.btnOrderType.Click += new System.EventHandler(this.btnObject_Click);
             // 
             // btnOrders
             // 
@@ -145,7 +146,7 @@
             this.btnOrders.TabIndex = 7;
             this.btnOrders.Text = "Ученик";
             this.btnOrders.UseVisualStyleBackColor = true;
-            this.btnOrders.Click += new System.EventHandler(this.btnOrders_Click);
+            this.btnOrders.Click += new System.EventHandler(this.btnStudents_Click);
             // 
             // groupBox1
             // 
@@ -170,7 +171,7 @@
             this.btnObject.TabIndex = 10;
             this.btnObject.Text = "Выбор ученика";
             this.btnObject.UseVisualStyleBackColor = true;
-            this.btnObject.Click += new System.EventHandler(this.btnObject_Click);
+            this.btnObject.Click += new System.EventHandler(this.btnStudentChoice_Click);
             // 
             // groupBox2
             // 
@@ -243,7 +244,7 @@
             this.ClientSize = new System.Drawing.Size(794, 444);
             this.Controls.Add(this.btnOrders);
             this.Controls.Add(this.btnOrderType);
-            this.Controls.Add(this.btnWorker);
+            this.Controls.Add(this.btnClass);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.btnFirmProfit);
@@ -270,7 +271,7 @@
         private System.Windows.Forms.Button btnFirmProfit;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button btnSave;
-        private System.Windows.Forms.Button btnWorker;
+        private System.Windows.Forms.Button btnClass;
         private System.Windows.Forms.Button btnOrderType;
         private System.Windows.Forms.Button btnOrders;
         private System.Windows.Forms.GroupBox groupBox1;

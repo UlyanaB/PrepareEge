@@ -68,6 +68,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChangeClass.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChangeClass.Designer.cs">
+      <DependentUpon>ChangeClass.cs</DependentUpon>
+    </Compile>
     <Compile Include="Student.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -88,6 +94,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="ChangeClass.resx">
+      <DependentUpon>ChangeClass.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Student.resx">
       <DependentUpon>Student.cs</DependentUpon>
     </EmbeddedResource>

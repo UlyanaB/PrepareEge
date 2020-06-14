@@ -140,18 +140,31 @@ namespace DB
 
         #endregion Работа с отчетами и формами ввода
 
+        /// <summary>
+        /// редактировать список предметов
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnObject_Click(object sender, EventArgs e)
         {
-            string select = "SELECT ob.id_object, ob.title FROM object0 ob;";
+            string select = "SELECT ob.id_object, ob.title  " +
+                            "   FROM object0 ob             " +
+                            "   Order by ob.title;";
             all_update_button(select);
+            dataGridView1.Columns[0].ReadOnly = true;
+            dt.TableName = "object0";
         }
 
-        
+
 
         private void BtnTeacher_Click(object sender, EventArgs e)
         {
-            string select = "SELECT te.id_teacher, te.namt, te.secondnamet, te.middlenamet, te.logint, te.passwordt FROM teacher te;";
+            string select = "SELECT te.id_teacher, te.namt, te.middlenamet, te.secondnamet, te.logint, te.passwordt " +
+                            "   FROM teacher te                                                                     " +
+                            "   ORDER BY te.secondnamet;";
             all_update_button(select);
+            dataGridView1.Columns[0].ReadOnly = true;
+            dt.TableName = "teacher";
         }
 
         private void button1_Click(object sender, EventArgs e)
