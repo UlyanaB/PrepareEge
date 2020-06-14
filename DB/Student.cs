@@ -364,7 +364,62 @@ namespace DB
 
         private void ChoiceStudentDoubleClick(DataGridViewRow dgvr)
         {
+            int id = (int)dgvr.Cells[0].Value;
 
+            string student =    dgvr.Cells[2].Value as string + " " + dgvr.Cells[4].Value + " " + 
+                                dgvr.Cells[3].Value + " " + dgvr.Cells[5].Value;
+            KeyValuePair<int, string> stud = new KeyValuePair<int, string>((int)dgvr.Cells[1].Value, student);
+            KeyValuePair<int, string> predmet = new KeyValuePair<int, string>((int)dgvr.Cells[6].Value, dgvr.Cells[7].Value as string);
+
+            ChangeStudentChoice csc = new ChangeStudentChoice();
+            csc.lblStudentChoiceId.Text = id.ToString();
+
+            // по студентам
+            string sqlStud =    "select      s.id_student, c.class_number || ' ' || s.secondnames || ' ' || s.nams || ' ' || s.middlenames   " +
+                                "    from    student s                                                                                       " +
+                                "    left join    class0 c on s.id_class = c.id_class                                                        " +
+                                "    order by c.class_number, s.secondnames, s.nams";
+            da = new NpgsqlDataAdapter(sqlStud, con);
+            ds.Reset();
+            da.Fill(ds);
+            dt = ds.Tables[0];
+            IList<KeyValuePair<int, string>> dsStudList = new List<KeyValuePair<int, string>>();
+            foreach(DataRow oneRow in dt.Rows)
+            {
+                dsStudList.Add(new KeyValuePair<int, string>((int)oneRow.ItemArray[0], oneRow.ItemArray[1] as string));
+            }
+            csc.cbxStudent.DataSource = dsStudList;
+
+            // по предметам
+            string sqlObj = "select id_object, title from object0 order by title";
+            da = new NpgsqlDataAdapter(sqlObj, con);
+            ds.Reset();
+            da.Fill(ds);
+            dt = ds.Tables[0];
+            IList<KeyValuePair<int, string>> dsObjList = new List<KeyValuePair<int, string>>();
+            foreach (DataRow oneRow in dt.Rows)
+            {
+                dsObjList.Add(new KeyValuePair<int, string>((int)oneRow.ItemArray[0], oneRow.ItemArray[1] as string));
+            }
+            csc.cbxObject.DataSource = dsObjList;
+
+            // 
+            csc.cbxStudent.SelectedItem = stud;
+            csc.cbxObject.SelectedItem = predmet;
+
+            DialogResult dr =  csc.ShowDialog();
+            if (dr == DialogResult.OK)
+            {
+
+            }
+            else if (dr == DialogResult.Cancel)
+            {
+
+            }
+            else
+            {
+
+            }
         }
 
         /// <summary>
