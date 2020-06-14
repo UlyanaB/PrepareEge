@@ -36,9 +36,10 @@
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Comic Sans MS", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button1.Location = new System.Drawing.Point(11, 136);
+            this.button1.Location = new System.Drawing.Point(8, 110);
+            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(166, 53);
+            this.button1.Size = new System.Drawing.Size(124, 43);
             this.button1.TabIndex = 0;
             this.button1.Text = "Ученик";
             this.button1.UseVisualStyleBackColor = true;
@@ -47,9 +48,10 @@
             // button2
             // 
             this.button2.Font = new System.Drawing.Font("Comic Sans MS", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button2.Location = new System.Drawing.Point(183, 136);
+            this.button2.Location = new System.Drawing.Point(137, 110);
+            this.button2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(166, 53);
+            this.button2.Size = new System.Drawing.Size(124, 43);
             this.button2.TabIndex = 1;
             this.button2.Text = "Учитель";
             this.button2.UseVisualStyleBackColor = true;
@@ -59,22 +61,23 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Comic Sans MS", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(78, 31);
+            this.label1.Location = new System.Drawing.Point(58, 25);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(195, 35);
+            this.label1.Size = new System.Drawing.Size(156, 27);
             this.label1.TabIndex = 2;
             this.label1.Text = "Администратор";
             // 
-            // Form2
+            // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(362, 196);
+            this.ClientSize = new System.Drawing.Size(272, 159);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
-            this.Name = "Form2";
-            this.Text = "Form2";
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Name = "MainForm";
             this.ResumeLayout(false);
             this.PerformLayout();
 

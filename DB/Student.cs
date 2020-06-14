@@ -238,6 +238,7 @@ namespace DB
         {
             string select = "SELECT cl.id_class, cl.class_number FROM class0 cl;";
             all_update_button(select);
+            dataGridView1.Columns[0].ReadOnly = true;
         }
 
         /// <summary>
@@ -249,6 +250,7 @@ namespace DB
         {
             string select = "SELECT ob.id_object, ob.title FROM object0 ob;";
             all_update_button(select);
+            dataGridView1.Columns[0].ReadOnly = true;
         }
 
         /// <summary>
@@ -258,7 +260,10 @@ namespace DB
         /// <param name="e"></param>
         private void btnOrders_Click(object sender, EventArgs e)
         {
-            string select = "SELECT s.id_student, s.id_class, s.nams, s.secondnames, s.middlenames, s.logins, s.passwords FROM student s;";
+            string select = "SELECT s.id_student,                                                                                   " +
+                            "       (select c.class_number from class0 c where c.id_class = s.id_class) class_number,               " +
+                            "       s.nams, s.secondnames, s.middlenames, s.logins, s.passwords                                     " +
+                            "   FROM    student s";
             all_update_button(select);
         }
 
@@ -271,7 +276,6 @@ namespace DB
         {
             da.Update(ds);
         }
-        
 
         private void btnObject_Click(object sender, EventArgs e)
         {
