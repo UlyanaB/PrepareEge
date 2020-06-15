@@ -195,7 +195,7 @@ namespace DB
             int id = (int)dgvr.Cells[0].Value;
 
             string teach =    dgvr.Cells[4].Value as string + " " + dgvr.Cells[5].Value + " " + dgvr.Cells[6].Value;
-            KeyValuePair<int, string> predmet = new KeyValuePair<int, string>((int)dgvr.Cells[1].Value, dgvr.Cells[2].Value as string);
+            KeyValuePair<int, string> predmet = new KeyValuePair<int, string>((int)(dgvr.Cells[1].Value ?? -1), (dgvr.Cells[2].Value ?? "") as string);
             KeyValuePair<int, string> teacher = new KeyValuePair<int, string>((int)dgvr.Cells[3].Value, teach);
 
             Lessons ls = new Lessons();
