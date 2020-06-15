@@ -114,6 +114,7 @@ namespace DB
         /// <param name="e"></param>
         private void BtnObject_Click(object sender, EventArgs e)
         {
+            PrepareGrid();
             string select = "SELECT ob.id_object, ob.title  " +
                             "   FROM object0 ob             " +
                             "   Order by ob.title;";
@@ -126,6 +127,7 @@ namespace DB
 
         private void BtnTeacher_Click(object sender, EventArgs e)
         {
+            PrepareGrid();
             string select = "SELECT te.id_teacher, te.namt, te.middlenamet, te.secondnamet, te.logint, te.passwordt " +
                             "   FROM teacher te                                                                     " +
                             "   ORDER BY te.secondnamet;";
@@ -134,10 +136,19 @@ namespace DB
             additionalHandling = "teacher";
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void PrepareGrid()
         {
+            foreach (DataGridViewColumn column in dataGridView1.Columns)
+            {
+                column.ReadOnly = false;
+            }
             dataGridView1.DataSource = null;
             dataGridView1.Rows.Clear();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            PrepareGrid();
             string select = "SELECT ls.id_lesson,                                       " +
                             "       ob.id_object, ob.title,                             " +
                             "       t.id_teacher, t.secondnamet, t.namt, t.middlenamet  " +
@@ -146,12 +157,16 @@ namespace DB
                             "   JOIN teacher t on ls.id_teacher = t.id_teacher          " +
                             "   ORDER BY t.secondnamet, t.namt, t.middlenamet           ";
             all_select_button(select);
+
             dataGridView1.Columns[0].ReadOnly = true;
+            dataGridView1.Columns[1].ReadOnly = true;
+            dataGridView1.Columns[3].ReadOnly = true;
             additionalHandling = "lesson";
         }
 
         private void BtnLessonVid_Click(object sender, EventArgs e)
         {
+            PrepareGrid();
             string sql =    "SELECT ls.id_lesson, ob.title, te.namt, te.secondnamet, te.middlenamet " +
                             "   FROM lesson ls, object0 ob, teacher te " +
                             "   WHERE ls.id_object = ob.id_object AND ls.id_teacher=te.id_teacher;";
@@ -165,12 +180,27 @@ namespace DB
 
         private void button2_Click(object sender, EventArgs e)
         {
-            string select = "SELECT cl.id_classlesson, cl.id_lesson, cl.id_class FROM class_lesson cl;";
-            all_update_button(select);
+            PrepareGrid();
+            string select = "select cl.id_classlesson,                                                                                      " +
+                            "       c0.id_class, c0.class_number,                                                                           " +
+                            "       ls.id_lesson, ob.title || ', ' || t.secondnamet || ' ' || t.namt || ' ' || t.middlenamet as teacher     " +
+                            "   from      class_lesson cl                                                                                   " +
+                            "   join class0 c0 on cl.id_class = c0.id_class                                                            " +
+                            "   join lesson ls on cl.id_lesson = ls.id_lesson                                                          " +
+                            "   join object0 ob on ls.id_object = ob.id_object                                                         " +
+                            "   join teacher t on ls.id_teacher = t.id_teacher                                                         " +
+                            "   order by c0.class_number, ob.title ";
+            all_select_button(select);
+
+            dataGridView1.Columns[0].ReadOnly = true;
+            dataGridView1.Columns[1].ReadOnly = true;
+            dataGridView1.Columns[3].ReadOnly = true;
+            additionalHandling = "class_lesson";
         }
 
         private void BtnClassLesson_Click(object sender, EventArgs e)
         {
+            PrepareGrid();
             string sql =    "SELECT cl.id_classlesson, te.namt, te.secondnamet, te.middlenamet, c0.class_number " +
                             "   FROM class_lesson cl, class0 c0, lesson le, teacher te " +
                             "   WHERE cl.id_lesson=le.id_lesson AND c0.id_class=cl.id_class AND te.id_teacher=le.id_teacher;";
@@ -189,7 +219,64 @@ namespace DB
                 case "lesson":
                     LessonDoubleClick(dgvr);
                     break;
+
+                case "class_lesson":
+                    ClassLessonDoubleClick(dgvr);
+                    break;
             }
+        }
+
+        private void ClassLessonDoubleClick(DataGridViewRow dgvr)
+        {
+            int id = (int)dgvr.Cells[0].Value;
+
+            int classKey = dgvr.Cells[1].Value is DBNull ? -1 : (int)dgvr.Cells[1].Value;
+            string classValue = dgvr.Cells[2].Value is DBNull ? "" : dgvr.Cells[2].Value as string;
+            KeyValuePair<int, string> class0 = new KeyValuePair<int, string>(classKey, classValue);
+
+            int teachKey = dgvr.Cells[3].Value is DBNull ? -1 : (int)dgvr.Cells[3].Value;
+            string teachValue = dgvr.Cells[4].Value is DBNull ? "" : dgvr.Cells[4].Value as string;
+            KeyValuePair<int, string> lesson = new KeyValuePair<int, string>(teachKey, teachValue);
+
+            // по классам
+            string sqlClass = "SELECT id_class, class_number FROM class0 order by class_number";
+            Program.mainForm.da = new NpgsqlDataAdapter(sqlClass, Program.mainForm.con);
+            Program.mainForm.ds.Reset();
+            Program.mainForm.da.Fill(Program.mainForm.ds);
+            Program.mainForm.dt = Program.mainForm.ds.Tables[0];
+            IList<KeyValuePair<int, string>> dsClassList = new List<KeyValuePair<int, string>>();
+            foreach (DataRow oneRow in Program.mainForm.dt.Rows)
+            {
+                dsClassList.Add(new KeyValuePair<int, string>((int)oneRow.ItemArray[0], oneRow.ItemArray[1] as string));
+            }
+
+            // по преподавателям
+            string sqlTch = "SELECT ls.id_lesson,                                                                           " +
+                            "       ob.title || ', ' || t.secondnamet || ' ' || t.namt || ' ' || t.middlenamet as teacher   " +
+                            "   from lesson ls                                                                              " +
+                            "   join object0 ob on ls.id_object = ob.id_object                                              " +
+                            "   join teacher t on ls.id_teacher = t.id_teacher                                              " +
+                            "   order by teacher    ";
+            Program.mainForm.da = new NpgsqlDataAdapter(sqlTch, Program.mainForm.con);
+            Program.mainForm.ds.Reset();
+            Program.mainForm.da.Fill(Program.mainForm.ds);
+            Program.mainForm.dt = Program.mainForm.ds.Tables[0];
+            IList<KeyValuePair<int, string>> dsLessonList = new List<KeyValuePair<int, string>>();
+            foreach (DataRow oneRow in Program.mainForm.dt.Rows)
+            {
+                dsLessonList.Add(new KeyValuePair<int, string>((int)oneRow.ItemArray[0], oneRow.ItemArray[1] as string));
+            }
+
+            LessonClass lessonClass = new LessonClass();
+            lessonClass.lblId.Text = id.ToString();
+            lessonClass.cbxClass.DataSource = dsClassList;
+            lessonClass.cbxLesson.DataSource = dsLessonList;
+
+            // 
+            lessonClass.cbxClass.SelectedItem = class0;
+            lessonClass.cbxLesson.SelectedItem = lesson;
+
+            DialogResult dr = lessonClass.ShowDialog();
         }
 
         private void LessonDoubleClick(DataGridViewRow dgvr)

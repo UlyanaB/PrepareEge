@@ -112,6 +112,18 @@ namespace DB
             dataGridView1.Columns[1].ReadOnly = false;
 
         }
+
+        private void PrepareGrid()
+        {
+            foreach (DataGridViewColumn column in dataGridView1.Columns)
+            {
+                column.ReadOnly = false;
+            }
+            dataGridView1.DataSource = null;
+            dataGridView1.Rows.Clear();
+        }
+
+
         #endregion Работа с отчетами и формами ввода
 
         #region Методы для работы с отчетами
@@ -213,6 +225,7 @@ namespace DB
         /// <param name="e"></param>
         private void btnClass_Click(object sender, EventArgs e)
         {
+            PrepareGrid();
             string select = "SELECT cl.id_class, cl.class_number FROM class0 cl;";
             all_update_button(select);
             dataGridView1.Columns[0].ReadOnly = true;
@@ -226,6 +239,7 @@ namespace DB
         /// <param name="e"></param>
         private void btnObject_Click(object sender, EventArgs e)
         {
+            PrepareGrid();
             string select = "SELECT ob.id_object, ob.title FROM object0 ob;";
             all_update_button(select);
             dataGridView1.Columns[0].ReadOnly = true;
@@ -239,6 +253,7 @@ namespace DB
         /// <param name="e"></param>
         private void btnStudents_Click(object sender, EventArgs e)
         {
+            PrepareGrid();
             string select = "SELECT s.id_student,                                                                                   " +
                             "       (select c.class_number from class0 c where c.id_class = s.id_class) class_number,               " +
                             "       s.nams, s.secondnames, s.middlenames, s.logins, s.passwords                                     " +
@@ -266,6 +281,7 @@ namespace DB
         /// <param name="e"></param>
         private void btnStudentChoice_Click(object sender, EventArgs e)
         {
+            PrepareGrid();
             string select = "SELECT chs.id_choicestudent,                                                               " +
                             "       s.id_student,                                                                       " +
                             "       (select c.class_number from class0 c where c.id_class = s.id_class) class_number,   " +
@@ -277,6 +293,8 @@ namespace DB
                             "   ORDER BY chs.id_choicestudent";
             all_select_button(select);
             dataGridView1.Columns[0].ReadOnly = true;
+            dataGridView1.Columns[1].ReadOnly = true;
+            dataGridView1.Columns[6].ReadOnly = true;
             additionalHandling = "choicestudent";
         }
         #endregion Методы для работы с формами ввода данных
