@@ -136,12 +136,14 @@ namespace DB
 
         private void button1_Click(object sender, EventArgs e)
         {
+            dataGridView1.DataSource = null;
+            dataGridView1.Rows.Clear();
             string select = "SELECT ls.id_lesson,                                       " +
                             "       ob.id_object, ob.title,                             " +
                             "       t.id_teacher, t.secondnamet, t.namt, t.middlenamet  " +
                             "   FROM lesson ls                                          " +
-                            "   LEFT JOIN object0 ob on ls.id_object = ob.id_object          " +
-                            "   LEFT JOIN teacher t on ls.id_teacher = t.id_teacher          " +
+                            "   JOIN object0 ob on ls.id_object = ob.id_object          " +
+                            "   JOIN teacher t on ls.id_teacher = t.id_teacher          " +
                             "   ORDER BY t.secondnamet, t.namt, t.middlenamet           ";
             all_select_button(select);
             dataGridView1.Columns[0].ReadOnly = true;
@@ -195,7 +197,9 @@ namespace DB
             int id = (int)dgvr.Cells[0].Value;
 
             string teach =    dgvr.Cells[4].Value as string + " " + dgvr.Cells[5].Value + " " + dgvr.Cells[6].Value;
-            KeyValuePair<int, string> predmet = new KeyValuePair<int, string>((int)(dgvr.Cells[1].Value ?? -1), (dgvr.Cells[2].Value ?? "") as string);
+            int predmetKey = dgvr.Cells[1].Value is DBNull ? -1 : (int)dgvr.Cells[1].Value;
+            string predmetValue = dgvr.Cells[2].Value is DBNull ? "" : dgvr.Cells[2].Value as string;
+            KeyValuePair<int, string> predmet = new KeyValuePair<int, string>(predmetKey, predmetValue);
             KeyValuePair<int, string> teacher = new KeyValuePair<int, string>((int)dgvr.Cells[3].Value, teach);
 
             Lessons ls = new Lessons();
