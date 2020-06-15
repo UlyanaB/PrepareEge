@@ -14,6 +14,8 @@ namespace DB
 {
     public partial class Student : Form
     {
+        private string additionalHandling = "";
+
         /// <summary>
         /// конструктор формы
         /// </summary>
@@ -214,6 +216,7 @@ namespace DB
             string select = "SELECT cl.id_class, cl.class_number FROM class0 cl;";
             all_update_button(select);
             dataGridView1.Columns[0].ReadOnly = true;
+            additionalHandling = "class0";
         }
 
         /// <summary>
@@ -226,6 +229,7 @@ namespace DB
             string select = "SELECT ob.id_object, ob.title FROM object0 ob;";
             all_update_button(select);
             dataGridView1.Columns[0].ReadOnly = true;
+            additionalHandling = "object0";
         }
 
         /// <summary>
@@ -242,6 +246,7 @@ namespace DB
             all_update_button(select);
             dataGridView1.Columns[0].ReadOnly = true;
             dataGridView1.Columns[1].ReadOnly = true;
+            additionalHandling = "student";
         }
 
         /// <summary>
@@ -272,7 +277,7 @@ namespace DB
                             "   ORDER BY chs.id_choicestudent";
             all_select_button(select);
             dataGridView1.Columns[0].ReadOnly = true;
-            Program.mainForm.dt.TableName = "choicestudent";
+            additionalHandling = "choicestudent";
         }
         #endregion Методы для работы с формами ввода данных
 
@@ -388,8 +393,9 @@ namespace DB
         {
             DataGridView dgv = sender as DataGridView;
             DataGridViewRow dgvr = dgv.Rows[e.RowIndex];
-            string tableName = (dgv.DataSource as DataTable).TableName;
-            switch(tableName)
+            string localAdditionalHandling = additionalHandling;
+            additionalHandling = "";
+            switch (localAdditionalHandling)
             {
                 case "student":
                     StudentDoubleClick(dgvr);
@@ -397,9 +403,6 @@ namespace DB
 
                 case "choicestudent":
                     ChoiceStudentDoubleClick(dgvr);
-                    break;
-
-                default:
                     break;
             }
         }

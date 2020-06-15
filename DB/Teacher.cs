@@ -13,6 +13,7 @@ namespace DB
 {
     public partial class BtnLesson : Form
     {
+        string additionalHandling = "";
 
         public BtnLesson()
         {
@@ -118,6 +119,7 @@ namespace DB
                             "   Order by ob.title;";
             all_update_button(select);
             dataGridView1.Columns[0].ReadOnly = true;
+            additionalHandling = "object0";
         }
 
 
@@ -129,6 +131,7 @@ namespace DB
                             "   ORDER BY te.secondnamet;";
             all_update_button(select);
             dataGridView1.Columns[0].ReadOnly = true;
+            additionalHandling = "teacher";
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -142,12 +145,14 @@ namespace DB
                             "   ORDER BY t.secondnamet, t.namt, t.middlenamet           ";
             all_select_button(select);
             dataGridView1.Columns[0].ReadOnly = true;
-            Program.mainForm.dt.TableName = "lesson";
+            additionalHandling = "lesson";
         }
 
         private void BtnLessonVid_Click(object sender, EventArgs e)
         {
-            string sql = "SELECT ls.id_lesson, ob.title, te.namt, te.secondnamet, te.middlenamet FROM lesson ls, object0 ob, teacher te WHERE ls.id_object = ob.id_object AND ls.id_teacher=te.id_teacher;";
+            string sql =    "SELECT ls.id_lesson, ob.title, te.namt, te.secondnamet, te.middlenamet " +
+                            "   FROM lesson ls, object0 ob, teacher te " +
+                            "   WHERE ls.id_object = ob.id_object AND ls.id_teacher=te.id_teacher;";
             all_select_button(sql);
         }
 
@@ -164,7 +169,9 @@ namespace DB
 
         private void BtnClassLesson_Click(object sender, EventArgs e)
         {
-            string sql = "SELECT cl.id_classlesson, te.namt, te.secondnamet, te.middlenamet, c0.class_number FROM class_lesson cl, class0 c0, lesson le, teacher te WHERE cl.id_lesson=le.id_lesson AND c0.id_class=cl.id_class AND te.id_teacher=le.id_teacher;";
+            string sql =    "SELECT cl.id_classlesson, te.namt, te.secondnamet, te.middlenamet, c0.class_number " +
+                            "   FROM class_lesson cl, class0 c0, lesson le, teacher te " +
+                            "   WHERE cl.id_lesson=le.id_lesson AND c0.id_class=cl.id_class AND te.id_teacher=le.id_teacher;";
             all_select_button(sql);
         }
 
@@ -173,13 +180,12 @@ namespace DB
             DataGridView dgv = sender as DataGridView;
             DataGridViewRow dgvr = dgv.Rows[e.RowIndex];
             string tableName = (dgv.DataSource as DataTable).TableName;
-            switch (tableName)
+            string localAdditionalHandling = additionalHandling;
+            additionalHandling = "";
+            switch (localAdditionalHandling)
             {
                 case "lesson":
                     LessonDoubleClick(dgvr);
-                    break;
-
-                default:
                     break;
             }
         }
