@@ -161,7 +161,7 @@ namespace DB
         /// <param name="e"></param>
         private void btnFirmProfit_Click(object sender, EventArgs e)
         {
-            string sql =    "select worker.id_worker, name, second_name, procent, " +
+            string sql = "select worker.id_worker, name, second_name, procent, " +
                             "       sum(salary_a) - (sum(salary_a)*procent) as pay_org " +
                             "   from worker, older, activies " +
                             "   where   older.id_worker = worker.id_worker " +
@@ -225,11 +225,19 @@ namespace DB
         /// <param name="e"></param>
         private void btnClass_Click(object sender, EventArgs e)
         {
-            PrepareGrid();
-            string select = "SELECT cl.id_class, cl.class_number FROM class0 cl;";
-            all_update_button(select);
-            dataGridView1.Columns[0].ReadOnly = true;
-            additionalHandling = "class0";
+            try
+            {
+                PrepareGrid();
+                string select = "SELECT cl.id_class, cl.class_number FROM class0 cl;";
+                all_update_button(select);
+                dataGridView1.Columns[0].ReadOnly = true;
+                additionalHandling = "class0";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error");
+            }
+
         }
 
         /// <summary>
@@ -239,11 +247,19 @@ namespace DB
         /// <param name="e"></param>
         private void btnObject_Click(object sender, EventArgs e)
         {
-            PrepareGrid();
-            string select = "SELECT ob.id_object, ob.title FROM object0 ob;";
-            all_update_button(select);
-            dataGridView1.Columns[0].ReadOnly = true;
-            additionalHandling = "object0";
+            try
+            {
+                PrepareGrid();
+                string select = "SELECT ob.id_object, ob.title FROM object0 ob;";
+                all_update_button(select);
+                dataGridView1.Columns[0].ReadOnly = true;
+                additionalHandling = "object0";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error");
+            }
+
         }
 
         /// <summary>
@@ -253,15 +269,23 @@ namespace DB
         /// <param name="e"></param>
         private void btnStudents_Click(object sender, EventArgs e)
         {
-            PrepareGrid();
-            string select = "SELECT s.id_student,                                                                                   " +
-                            "       (select c.class_number from class0 c where c.id_class = s.id_class) class_number,               " +
-                            "       s.nams, s.secondnames, s.middlenames, s.logins, s.passwords                                     " +
-                            "   FROM    student s";
-            all_update_button(select);
-            dataGridView1.Columns[0].ReadOnly = true;
-            dataGridView1.Columns[1].ReadOnly = true;
-            additionalHandling = "student";
+            try
+            {
+                PrepareGrid();
+                string select = "SELECT s.id_student,                                                                                   " +
+                                "       (select c.class_number from class0 c where c.id_class = s.id_class) class_number,               " +
+                                "       s.nams, s.secondnames, s.middlenames, s.logins, s.passwords                                     " +
+                                "   FROM    student s";
+                all_update_button(select);
+                dataGridView1.Columns[0].ReadOnly = true;
+                dataGridView1.Columns[1].ReadOnly = true;
+                additionalHandling = "student";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error");
+            }
+
         }
 
         /// <summary>
@@ -271,7 +295,15 @@ namespace DB
         /// <param name="e"></param>
         private void btnSave_Click(object sender, EventArgs e)
         {
-            Program.mainForm.da.Update(Program.mainForm.ds);
+            try
+            {
+                Program.mainForm.da.Update(Program.mainForm.ds);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error");
+            }
+
         }
 
         /// <summary>
@@ -281,21 +313,29 @@ namespace DB
         /// <param name="e"></param>
         private void btnStudentChoice_Click(object sender, EventArgs e)
         {
-            PrepareGrid();
-            string select = "SELECT chs.id_choicestudent,                                                               " +
-                            "       s.id_student,                                                                       " +
-                            "       (select c.class_number from class0 c where c.id_class = s.id_class) class_number,   " +
-                            "       s.nams, s.secondnames, s.middlenames,                                               " +
-                            "       chs.id_object, ob.title                                                             " +
-                            "   FROM choicestudent chs                                                                  " +
-                            "   JOIN student s on chs.id_student = s.id_student                                         " +
-                            "   JOIN object0 ob on chs.id_object = ob.id_object                                         " + 
-                            "   ORDER BY chs.id_choicestudent";
-            all_select_button(select);
-            dataGridView1.Columns[0].ReadOnly = true;
-            dataGridView1.Columns[1].ReadOnly = true;
-            dataGridView1.Columns[6].ReadOnly = true;
-            additionalHandling = "choicestudent";
+            try
+            {
+                PrepareGrid();
+                string select = "SELECT chs.id_choicestudent,                                                               " +
+                                "       s.id_student,                                                                       " +
+                                "       (select c.class_number from class0 c where c.id_class = s.id_class) class_number,   " +
+                                "       s.nams, s.secondnames, s.middlenames,                                               " +
+                                "       chs.id_object, ob.title                                                             " +
+                                "   FROM choicestudent chs                                                                  " +
+                                "   JOIN student s on chs.id_student = s.id_student                                         " +
+                                "   JOIN object0 ob on chs.id_object = ob.id_object                                         " +
+                                "   ORDER BY chs.id_choicestudent";
+                all_select_button(select);
+                dataGridView1.Columns[0].ReadOnly = true;
+                dataGridView1.Columns[1].ReadOnly = true;
+                dataGridView1.Columns[6].ReadOnly = true;
+                additionalHandling = "choicestudent";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error");
+            }
+
         }
         #endregion Методы для работы с формами ввода данных
 
@@ -351,6 +391,7 @@ namespace DB
                 {
                     MessageBox.Show("DialogResult = " + dr.ToString(), "Error");
                 }
+
             }
         }
 
@@ -358,7 +399,7 @@ namespace DB
         {
             int id = (int)dgvr.Cells[0].Value;
 
-            string student =    dgvr.Cells[2].Value as string + " " + dgvr.Cells[4].Value + " " + 
+            string student = dgvr.Cells[2].Value as string + " " + dgvr.Cells[4].Value + " " +
                                 dgvr.Cells[3].Value + " " + dgvr.Cells[5].Value;
             KeyValuePair<int, string> stud = new KeyValuePair<int, string>((int)dgvr.Cells[1].Value, student);
             KeyValuePair<int, string> predmet = new KeyValuePair<int, string>((int)dgvr.Cells[6].Value, dgvr.Cells[7].Value as string);
@@ -367,7 +408,7 @@ namespace DB
             csc.lblStudentChoiceId.Text = id.ToString();
 
             // по студентам
-            string sqlStud =    "select      s.id_student, c.class_number || ' ' || s.secondnames || ' ' || s.nams || ' ' || s.middlenames   " +
+            string sqlStud = "select      s.id_student, c.class_number || ' ' || s.secondnames || ' ' || s.nams || ' ' || s.middlenames   " +
                                 "    from    student s                                                                                       " +
                                 "    left join    class0 c on s.id_class = c.id_class                                                        " +
                                 "    order by c.class_number, s.secondnames, s.nams";
@@ -376,7 +417,7 @@ namespace DB
             Program.mainForm.da.Fill(Program.mainForm.ds);
             Program.mainForm.dt = Program.mainForm.ds.Tables[0];
             IList<KeyValuePair<int, string>> dsStudList = new List<KeyValuePair<int, string>>();
-            foreach(DataRow oneRow in Program.mainForm.dt.Rows)
+            foreach (DataRow oneRow in Program.mainForm.dt.Rows)
             {
                 dsStudList.Add(new KeyValuePair<int, string>((int)oneRow.ItemArray[0], oneRow.ItemArray[1] as string));
             }
@@ -399,7 +440,7 @@ namespace DB
             csc.cbxStudent.SelectedItem = stud;
             csc.cbxObject.SelectedItem = predmet;
 
-            DialogResult dr =  csc.ShowDialog();
+            DialogResult dr = csc.ShowDialog();
         }
 
         /// <summary>
@@ -409,20 +450,28 @@ namespace DB
         /// <param name="e"></param>
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            DataGridView dgv = sender as DataGridView;
-            DataGridViewRow dgvr = dgv.Rows[e.RowIndex];
-            string localAdditionalHandling = additionalHandling;
-            additionalHandling = "";
-            switch (localAdditionalHandling)
+            try
             {
-                case "student":
-                    StudentDoubleClick(dgvr);
-                    break;
+                DataGridView dgv = sender as DataGridView;
+                DataGridViewRow dgvr = dgv.Rows[e.RowIndex];
+                string localAdditionalHandling = additionalHandling;
+                additionalHandling = "";
+                switch (localAdditionalHandling)
+                {
+                    case "student":
+                        StudentDoubleClick(dgvr);
+                        break;
 
-                case "choicestudent":
-                    ChoiceStudentDoubleClick(dgvr);
-                    break;
+                    case "choicestudent":
+                        ChoiceStudentDoubleClick(dgvr);
+                        break;
+                }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error");
+            }
+
         }
     }
 }

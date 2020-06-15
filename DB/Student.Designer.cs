@@ -63,7 +63,7 @@
             // btnWorkerProfit
             // 
             this.btnWorkerProfit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnWorkerProfit.Location = new System.Drawing.Point(629, 389);
+            this.btnWorkerProfit.Location = new System.Drawing.Point(924, 389);
             this.btnWorkerProfit.Margin = new System.Windows.Forms.Padding(2);
             this.btnWorkerProfit.Name = "btnWorkerProfit";
             this.btnWorkerProfit.Size = new System.Drawing.Size(156, 19);
@@ -76,7 +76,7 @@
             // btnFirmProfit
             // 
             this.btnFirmProfit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnFirmProfit.Location = new System.Drawing.Point(629, 413);
+            this.btnFirmProfit.Location = new System.Drawing.Point(924, 413);
             this.btnFirmProfit.Margin = new System.Windows.Forms.Padding(2);
             this.btnFirmProfit.Name = "btnFirmProfit";
             this.btnFirmProfit.Size = new System.Drawing.Size(156, 19);
@@ -96,14 +96,14 @@
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(616, 424);
+            this.dataGridView1.Size = new System.Drawing.Size(911, 424);
             this.dataGridView1.TabIndex = 3;
             this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
             // 
             // btnSave
             // 
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSave.Location = new System.Drawing.Point(637, 41);
+            this.btnSave.Location = new System.Drawing.Point(932, 41);
             this.btnSave.Margin = new System.Windows.Forms.Padding(2);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(148, 19);
@@ -115,7 +115,7 @@
             // btnClass
             // 
             this.btnClass.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnClass.Location = new System.Drawing.Point(637, 76);
+            this.btnClass.Location = new System.Drawing.Point(932, 76);
             this.btnClass.Margin = new System.Windows.Forms.Padding(2);
             this.btnClass.Name = "btnClass";
             this.btnClass.Size = new System.Drawing.Size(148, 19);
@@ -127,7 +127,7 @@
             // btnOrderType
             // 
             this.btnOrderType.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOrderType.Location = new System.Drawing.Point(637, 100);
+            this.btnOrderType.Location = new System.Drawing.Point(932, 100);
             this.btnOrderType.Margin = new System.Windows.Forms.Padding(2);
             this.btnOrderType.Name = "btnOrderType";
             this.btnOrderType.Size = new System.Drawing.Size(148, 19);
@@ -139,7 +139,7 @@
             // btnOrders
             // 
             this.btnOrders.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOrders.Location = new System.Drawing.Point(637, 124);
+            this.btnOrders.Location = new System.Drawing.Point(932, 124);
             this.btnOrders.Margin = new System.Windows.Forms.Padding(2);
             this.btnOrders.Name = "btnOrders";
             this.btnOrders.Size = new System.Drawing.Size(148, 19);
@@ -152,7 +152,7 @@
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.btnObject);
-            this.groupBox1.Location = new System.Drawing.Point(637, 10);
+            this.groupBox1.Location = new System.Drawing.Point(932, 10);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
@@ -181,7 +181,7 @@
             this.groupBox2.Controls.Add(this.btnOrderByWorker);
             this.groupBox2.Controls.Add(this.tbParam1);
             this.groupBox2.Controls.Add(this.btnOrderQuantity);
-            this.groupBox2.Location = new System.Drawing.Point(629, 206);
+            this.groupBox2.Location = new System.Drawing.Point(924, 206);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
@@ -241,7 +241,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(794, 444);
+            this.ClientSize = new System.Drawing.Size(1089, 444);
             this.Controls.Add(this.btnOrders);
             this.Controls.Add(this.btnOrderType);
             this.Controls.Add(this.btnClass);

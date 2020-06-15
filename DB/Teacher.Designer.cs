@@ -53,7 +53,7 @@
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(450, 379);
+            this.dataGridView1.Size = new System.Drawing.Size(889, 379);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
             // 
@@ -65,7 +65,7 @@
             this.groupBox1.Controls.Add(this.BtnTeacher);
             this.groupBox1.Controls.Add(this.BtnObject);
             this.groupBox1.Controls.Add(this.btnSave);
-            this.groupBox1.Location = new System.Drawing.Point(475, 11);
+            this.groupBox1.Location = new System.Drawing.Point(914, 11);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
@@ -135,7 +135,7 @@
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox2.Controls.Add(this.BtnClassLesson);
             this.groupBox2.Controls.Add(this.BtnLessonVid);
-            this.groupBox2.Location = new System.Drawing.Point(475, 202);
+            this.groupBox2.Location = new System.Drawing.Point(914, 202);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
@@ -162,7 +162,7 @@
             this.BtnLessonVid.Name = "BtnLessonVid";
             this.BtnLessonVid.Size = new System.Drawing.Size(150, 19);
             this.BtnLessonVid.TabIndex = 0;
-            this.BtnLessonVid.Text = "Препадаёт";
+            this.BtnLessonVid.Text = "Преподаёт";
             this.BtnLessonVid.UseVisualStyleBackColor = true;
             this.BtnLessonVid.Click += new System.EventHandler(this.BtnLessonVid_Click);
             // 
@@ -170,7 +170,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(650, 400);
+            this.ClientSize = new System.Drawing.Size(1089, 400);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dataGridView1);
