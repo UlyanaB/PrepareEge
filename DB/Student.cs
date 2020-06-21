@@ -118,6 +118,7 @@ namespace DB
             foreach (DataGridViewColumn column in dataGridView1.Columns)
             {
                 column.ReadOnly = false;
+                column.Visible = true;
             }
             dataGridView1.DataSource = null;
             dataGridView1.Rows.Clear();
@@ -231,6 +232,7 @@ namespace DB
                 string select = "SELECT cl.id_class, cl.class_number FROM class0 cl;";
                 all_update_button(select);
                 dataGridView1.Columns[0].ReadOnly = true;
+                dataGridView1.Columns[0].Visible = false;
                 additionalHandling = "class0";
             }
             catch (Exception ex)
@@ -253,6 +255,7 @@ namespace DB
                 string select = "SELECT ob.id_object, ob.title FROM object0 ob;";
                 all_update_button(select);
                 dataGridView1.Columns[0].ReadOnly = true;
+                dataGridView1.Columns[0].Visible = false;
                 additionalHandling = "object0";
             }
             catch (Exception ex)
@@ -279,6 +282,9 @@ namespace DB
                 all_update_button(select);
                 dataGridView1.Columns[0].ReadOnly = true;
                 dataGridView1.Columns[1].ReadOnly = true;
+                dataGridView1.Columns[0].Visible = false;
+                dataGridView1.Columns[1].Visible = false;
+
                 additionalHandling = "student";
             }
             catch (Exception ex)
@@ -329,6 +335,9 @@ namespace DB
                 dataGridView1.Columns[0].ReadOnly = true;
                 dataGridView1.Columns[1].ReadOnly = true;
                 dataGridView1.Columns[6].ReadOnly = true;
+                dataGridView1.Columns[0].Visible = false;
+                dataGridView1.Columns[1].Visible = false;
+                dataGridView1.Columns[6].Visible = false;
                 additionalHandling = "choicestudent";
             }
             catch (Exception ex)

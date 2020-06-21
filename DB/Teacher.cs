@@ -122,6 +122,7 @@ namespace DB
                                 "   Order by ob.title;";
                 all_update_button(select);
                 dataGridView1.Columns[0].ReadOnly = true;
+                dataGridView1.Columns[0].Visible = false;
                 additionalHandling = "object0";
             }
             catch (Exception ex)
@@ -143,6 +144,7 @@ namespace DB
                                 "   ORDER BY te.secondnamet;";
                 all_update_button(select);
                 dataGridView1.Columns[0].ReadOnly = true;
+                dataGridView1.Columns[0].Visible = false;
                 additionalHandling = "teacher";
             }
             catch (Exception ex)
@@ -187,6 +189,9 @@ namespace DB
                 dataGridView1.Columns[0].ReadOnly = true;
                 dataGridView1.Columns[1].ReadOnly = true;
                 dataGridView1.Columns[3].ReadOnly = true;
+                dataGridView1.Columns[0].Visible = false;
+                dataGridView1.Columns[1].Visible = false;
+                dataGridView1.Columns[3].Visible = false;
                 additionalHandling = "lesson";
             }
             catch (Exception ex)
@@ -245,6 +250,9 @@ namespace DB
                 dataGridView1.Columns[0].ReadOnly = true;
                 dataGridView1.Columns[1].ReadOnly = true;
                 dataGridView1.Columns[3].ReadOnly = true;
+                dataGridView1.Columns[0].Visible = false;
+                dataGridView1.Columns[1].Visible = false;
+                dataGridView1.Columns[3].Visible = false;
                 additionalHandling = "class_lesson";
             }
             catch (Exception ex)
