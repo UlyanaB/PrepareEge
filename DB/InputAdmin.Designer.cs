@@ -92,11 +92,11 @@
             // LbMessage
             // 
             this.LbMessage.AutoSize = true;
+            this.LbMessage.ForeColor = System.Drawing.Color.Red;
             this.LbMessage.Location = new System.Drawing.Point(12, 151);
             this.LbMessage.Name = "LbMessage";
-            this.LbMessage.Size = new System.Drawing.Size(35, 13);
+            this.LbMessage.Size = new System.Drawing.Size(0, 13);
             this.LbMessage.TabIndex = 6;
-            this.LbMessage.Text = "label3";
             // 
             // InputAdmin
             // 
