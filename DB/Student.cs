@@ -281,9 +281,7 @@ namespace DB
                                 "   FROM    student s";
                 all_update_button(select);
                 dataGridView1.Columns[0].ReadOnly = true;
-                dataGridView1.Columns[1].ReadOnly = true;
                 dataGridView1.Columns[0].Visible = false;
-                dataGridView1.Columns[1].Visible = false;
 
                 additionalHandling = "student";
             }
